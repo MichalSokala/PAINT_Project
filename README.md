@@ -1,5 +1,5 @@
 # PAINT Project
-A project created for PAINT (Web application programming) course at Warsaw University of Technology.
+A project created for PAINT (Web application programming) course at the Warsaw University of Technology.
 ## Collaborators:
 - [Ania Muszyńska](https://github.com/anikamu)
 - [Zoja Hordyńska](https://github.com/ZojaHordynska)
