@@ -7,4 +7,4 @@ A project created for PAINT (Web application programming) course at the Warsaw U
 - [Michał Sokala](https://github.com/MichalSokala)
 - [Patryk Jankowski](https://github.com/PilotPat25)
 - [Jakub Walasek](https://github.com/Elmonus)
-### Used techmologies:
+### Used technologies:
