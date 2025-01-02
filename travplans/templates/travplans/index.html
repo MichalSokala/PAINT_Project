@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+{%  if main_destination_list %}
+    <ul>
+        <p> The main destinations are:</p>
+        {% for travel in main_destination_list %}
+{#        <li><a href="/travplans/{{ travel.id }}/">{{ travel.main_destination }}</a></li>#}
+        <li><a href="{% url 'travplans:show_travel' travel.id %}">{{ travel.main_destination }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No main destinations are available.</p>
+{% endif %}
+</body>
+</html>

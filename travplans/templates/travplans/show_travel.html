@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+<h1>
+    {{ travel.main_destination }}
+    <p> The name of this travel is: {{ travel.name}} </p>
+</h1>
+<ul>
+{%  for  travel_group in travel.travel_group_set.all %}
+    <li>{{ travel_group.group_id }} <p> beka 2</p></li>
+{% endfor %}
+</ul>
+</body>
+</html>
