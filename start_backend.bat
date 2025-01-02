@@ -1,8 +1,11 @@
 @echo off
-echo Uruchamianie backendu Django...
+echo Aktualizowanie migracji...
+cd backend
+python manage.py makemigrations
+python manage.py migrate
 
-:: Uruchom backend Django w tle
-start /min cmd /c "cd backend && python manage.py runserver"
+echo Uruchamianie backendu Django...
+start /min cmd /c "python manage.py runserver"
 
 :: Otwórz stronę backendu w przeglądarce
 start http://127.0.0.1:8000/api/tasks/
