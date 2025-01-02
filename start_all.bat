@@ -1,14 +1,11 @@
 @echo off
-echo Uruchamianie backendu i frontendu...
+echo Uruchamianie wszystkich usług...
 
-:: Uruchom backend Django w tle
-start /min cmd /c "cd backend && python manage.py runserver"
+:: Uruchom backend (niezależnie od frontend)
+start /min cmd /c "start_backend.bat"
 
-:: Uruchom frontend React w tle
-start /min cmd /c "cd myfrontend && npm start"
-
-:: Otwórz strony w przeglądarce
-start http://127.0.0.1:8000/api/tasks/
+:: Uruchom frontend
+start /min cmd /c "start_frontend.bat"
 
 echo Wszystkie usługi zostały uruchomione.
 pause
