@@ -4,13 +4,15 @@ from django.utils import timezone
 
 class Travel(models.Model):
     """class describing a travel"""
-    user_id = models.ForeignKey("User", on_delete=models.CASCADE)
+    """user_id = models.ForeignKey("User", on_delete=models.CASCADE)"""
     travel_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     main_destination = models.CharField(max_length=100)
     start_date = models.DateTimeField("Beginning of travel date")
     end_date = models.DateTimeField("End of travel date")
     is_completed = models.BooleanField(default=False)
+
+
     def is_starting(self):
         return self.start_date >= timezone.now() + datetime.timedelta(days=1)
 

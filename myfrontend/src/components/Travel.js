@@ -10,8 +10,8 @@ const Travel = () => {
         end_date: "",
         is_completed: false,
     });
+    const [errorMessage, setErrorMessage] = useState("");
 
-    // Funkcja do pobierania listy podróży
     const fetchTravels = async () => {
         try {
             const response = await axios.get("http://127.0.0.1:8000/api/travel/");
@@ -22,10 +22,9 @@ const Travel = () => {
     };
 
     useEffect(() => {
-        fetchTravels(); // Pierwsze załadowanie danych
+        fetchTravels();
     }, []);
 
-    // Funkcja do obsługi dodawania nowej podróży
     const handleAddTravel = async () => {
         try {
             await axios.post("http://127.0.0.1:8000/api/travel/", newTravel);
@@ -36,9 +35,11 @@ const Travel = () => {
                 end_date: "",
                 is_completed: false,
             });
-            fetchTravels(); // Odświeżenie listy po dodaniu nowej podróży
+            setErrorMessage("");
+            fetchTravels();
         } catch (error) {
-            console.error("Błąd podczas dodawania podróży:", error);
+            console.error("Błąd podczas dodawania podróży:", error.response?.data || error.message);
+            setErrorMessage("Nie udało się dodać podróży. Sprawdź dane i spróbuj ponownie.");
         }
     };
 
@@ -46,6 +47,7 @@ const Travel = () => {
         <div>
             <h1>Lista podróży</h1>
             <h2>Dodaj nową podróż</h2>
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
             <form onSubmit={(e) => e.preventDefault()}>
                 <input
                     type="text"
