@@ -13,10 +13,10 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/travel" element={<Travel />} />
-                <Route path="/travel_groups" element={<TravelGroup />} />
+                <Route path="/travels" element={<Travel />} />
+                <Route path="/travel-groups" element={<TravelGroup />} />
                 <Route path="/costs" element={<Cost />} />
-                <Route path="/travel_parts" element={<TravelPart />} />
+                <Route path="/travel-parts" element={<TravelPart />} />
                 <Route path="/items" element={<ItemList />} />
                 <Route path="/places" element={<PlacesToSee />} />
             </Routes>
