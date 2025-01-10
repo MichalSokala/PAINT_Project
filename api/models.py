@@ -2,7 +2,6 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
-
 class Travel(models.Model):
     """class describing a travel"""
     user_id = models.ForeignKey("User", on_delete=models.CASCADE)
@@ -21,7 +20,7 @@ class Travel(models.Model):
 
 class Travel_group(models.Model):
     """class describing a travel group"""
-    group_id = models.IntegerField()
+    group_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey("User", on_delete=models.CASCADE)
     travel_id = models.ForeignKey("Travel", on_delete=models.CASCADE)#definition of foreign key
 
@@ -36,7 +35,7 @@ class User(models.Model):
     surname = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.name
+        return f"{self.id}"
 
 class Cost(models.Model):
     """class describing a cost"""
