@@ -63,6 +63,7 @@ const Cost = () => {
                 />
                 <input
                     type="text"
+                    placeholder="Kategoria"
                     value={newCost.category}
                     onChange={(e) =>
                         setNewCost({ ...newCost, category: e.target.value })
@@ -70,6 +71,7 @@ const Cost = () => {
                 />
                 <input
                     type="number"
+                    placeholder="Kwota"
                     value={newCost.amount}
                     onChange={(e) =>
                         setNewCost({ ...newCost, amount: e.target.value })
