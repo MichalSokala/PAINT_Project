@@ -4,7 +4,7 @@ import axios from "axios";
 const TravelGroup = () => {
     const [travelGroups, setTravelGroups] = useState([]);
     const [newTravelGroup, setNewTravelGroup] = useState({
-        travel_id: "",
+        travel_id: "", //foreign key to Travel model
         user_id: "",
     });
     const [errorMessage, setErrorMessage] = useState("");
