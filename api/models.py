@@ -2,33 +2,6 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
-class Travel(models.Model):
-    """class describing a travel"""
-    """user_id = models.ForeignKey("User", on_delete=models.CASCADE)"""
-    travel_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    main_destination = models.CharField(max_length=100)
-    start_date = models.DateTimeField("Beginning of travel date")
-    end_date = models.DateTimeField("End of travel date")
-    is_completed = models.BooleanField(default=False)
-
-
-    def is_starting(self):
-        return self.start_date >= timezone.now() + datetime.timedelta(days=1)
-
-    def __str__(self):
-        return self.name
-
-
-class Travel_group(models.Model):
-    """class describing a travel group"""
-    group_id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey("User", on_delete=models.CASCADE)
-    travel_id = models.ForeignKey("Travel", on_delete=models.CASCADE)#definition of foreign key
-
-    def __str__(self):
-        return self.group_id
-
 
 class User(models.Model):
     """class describing a user"""
@@ -38,6 +11,22 @@ class User(models.Model):
 
     def __str__(self):
         return f"{self.id}"
+
+class Travel(models.Model):
+    """class describing a travel"""
+    travel_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+    main_destination = models.CharField(max_length=100)
+    start_date = models.DateTimeField("Beginning of travel date")
+    end_date = models.DateTimeField("End of travel date")
+    is_completed = models.BooleanField(default=False)
+    users = models.ManyToManyField(User)
+
+    def is_starting(self):
+        return self.start_date >= timezone.now() + datetime.timedelta(days=1)
+
+    def __str__(self):
+        return self.name
 
 class Cost(models.Model):
     """class describing a cost"""
