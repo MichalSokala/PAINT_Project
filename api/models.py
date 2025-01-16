@@ -2,7 +2,6 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
-
 class User(models.Model):
     """class describing a user"""
     id = models.AutoField(primary_key=True)
@@ -17,8 +16,8 @@ class Travel(models.Model):
     travel_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     main_destination = models.CharField(max_length=100)
-    start_date = models.DateTimeField("Beginning of travel date")
-    end_date = models.DateTimeField("End of travel date")
+    start_date = models.DateTimeField("Beginning of travel")
+    end_date = models.DateTimeField("End of travel")
     is_completed = models.BooleanField(default=False)
     users = models.ManyToManyField(User)
 
@@ -30,9 +29,17 @@ class Travel(models.Model):
 
 class Cost(models.Model):
     """class describing a cost"""
+    CATEGORY_CHOICES = [
+        ('zakwaterowanie', 'Zakwaterowanie'),
+        ('transport', 'Transport'),
+        ('jedzenie', 'Jedzenie'),
+        ('rozrywka', 'Rozrywka'),
+        ('inne', 'Inne'),
+    ]
+
     cost_id = models.AutoField(primary_key=True)
     travel_id = models.ForeignKey("Travel", on_delete=models.CASCADE)
-    category = models.CharField(max_length=40)
+    category = models.CharField(max_length=40, choices=CATEGORY_CHOICES)
     amount = models.IntegerField()
 
     def __str__(self):
@@ -46,8 +53,8 @@ class Travel_part(models.Model):
     end_location = models.CharField(max_length=120)
     transport = models.CharField(max_length=120) # describes the means of transport used during
     # a certain part of a travel
-    part_start_date = models.DateTimeField("Date on which said part of a travel starts")
-    part_end_date = models.DateTimeField("Date on which said part of a travel ends")
+    part_start_date = models.DateTimeField("Beginning of travel part")
+    part_end_date = models.DateTimeField("End of travel part")
 
     def __str__(self):
         return self.part_id
