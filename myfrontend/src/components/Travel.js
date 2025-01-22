@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Header from "./Header";
 
 const Travel = () => {
     const [travels, setTravels] = useState([]);
@@ -45,6 +46,7 @@ const Travel = () => {
 
     return (
         <div>
+            <Header/>
             <h1>Lista podróży</h1>
             <h2>Dodaj nową podróż</h2>
             {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
@@ -78,7 +80,6 @@ const Travel = () => {
                     }
                 />
                 <label>
-                    Czy zakończona:
                     <input
                         type="checkbox"
                         checked={newTravel.is_completed}
@@ -86,6 +87,7 @@ const Travel = () => {
                             setNewTravel({ ...newTravel, is_completed: e.target.checked })
                         }
                     />
+                    Czy zakończona
                 </label>
                 <button onClick={handleAddTravel}>Dodaj podróż</button>
             </form>

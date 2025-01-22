@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Header from "./Header";
 
 const Cost = () => {
     const [costs, setCosts] = useState([]);
@@ -43,6 +44,7 @@ const Cost = () => {
 
     return (
         <div>
+            <Header/>
             <h1>Lista kosztów</h1>
             <h2>Dodaj nowy koszt</h2>
             {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}

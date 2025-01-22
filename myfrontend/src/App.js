@@ -7,8 +7,10 @@ import Cost from "./components/Cost";
 import TravelPart from "./components/TravelPart";
 import ItemList from "./components/ItemList";
 import PlacesToSee from "./components/PlacesToSee";
+import LoginPage from "./components/LoginPage";
 
 function App() {
+
     return (
         <Router>
             <Routes>
@@ -19,6 +21,8 @@ function App() {
                 <Route path="/travel_parts" element={<TravelPart />} />
                 <Route path="/items" element={<ItemList />} />
                 <Route path="/places" element={<PlacesToSee />} />
+
+                <Route path="/login" element={<LoginPage />} />
             </Routes>
         </Router>
     );

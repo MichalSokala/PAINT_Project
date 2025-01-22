@@ -1,0 +1,12 @@
+form
+{
+    padding: 10px;
+}
+
+form > input,
+form > label,
+form > select
+{
+    display: block;
+    margin: 10px;
+}
