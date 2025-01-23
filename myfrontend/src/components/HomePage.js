@@ -9,6 +9,7 @@ const HomePage = () => {
             <h1>Witamy w aplikacji podróżniczej</h1>
             <nav>
                 <ul>
+                    <li><Link to ="/">Strona startowa</Link></li>
                     <li><Link to="/travel">Podróże</Link></li>
                     <li><Link to="/travel_groups">Grupy podróżnicze</Link></li>
                     <li><Link to="/costs">Koszty</Link></li>

@@ -1,7 +1,5 @@
 from rest_framework import serializers
-from .models import (Travel, User, Cost,
-                     Item_list, Places_to_see,
-                     Travel_part, Travel_group)
+from .models import *
 
 class TravelSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,22 +16,17 @@ class CostSerializer(serializers.ModelSerializer):
         model = Cost
         fields = '__all__'
 
-class Places_to_see_Serializer(serializers.ModelSerializer):
+class PlacesToSeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Places_to_see
         fields = '__all__'
 
-class Travel_part_Serializer(serializers.ModelSerializer):
+class TravelPartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Travel_part
         fields = '__all__'
 
-class Travel_group_Serializer(serializers.ModelSerializer):
-    class Meta:
-        model = Travel_group
-        fields = '__all__'
-
-class Item_listSerializer(serializers.ModelSerializer):
+class ItemListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item_list
         fields = '__all__'

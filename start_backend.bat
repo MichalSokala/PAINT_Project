@@ -1,6 +1,6 @@
 @echo off
 echo Aktualizowanie migracji...
-cd backend
+
 python manage.py makemigrations
 python manage.py migrate
 

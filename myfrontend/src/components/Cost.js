@@ -73,7 +73,7 @@ const Cost = () => {
                 />
                 <input
                     type="number"
-                    placeholder="Kwota"
+                    placeholder="Koszt"
                     value={newCost.amount}
                     onChange={(e) =>
                         setNewCost({ ...newCost, amount: e.target.value })
