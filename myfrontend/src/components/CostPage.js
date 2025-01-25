@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import Layout from "./Layout";
 import axios from "axios";
+import { PieChart } from '@mui/x-charts/PieChart';
 
 const CostPage = () => {
     const [costs, setCosts] = useState([]);
@@ -37,6 +38,19 @@ const CostPage = () => {
             <div>
                 <Link to="/cost">Dodaj nowy koszt</Link>
             </div>
+            <PieChart
+      series={[ ///do wizualizacji tylko
+        {
+          data: [
+            { id: 0, value: 10, label: 'series A' },
+            { id: 1, value: 15, label: 'series B' },
+            { id: 2, value: 20, label: 'series C' },
+          ],
+        },
+      ]}
+      width={400}
+      height={200}
+    />
         </Layout>
     );
 };

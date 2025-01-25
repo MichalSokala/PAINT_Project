@@ -19,12 +19,33 @@ header .page-title a {
   text-decoration: none;
 }
 
+header div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 header div a {
   padding: 10px 15px;
   /*background-color: #1976d2;*/
   color: white;
   border-radius: 5px;
   text-decoration: none;
+}
+header div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header .page-title a {
+  font-size: 1.5em;
+}
+
+@media (max-width: 768px) {
+  header .page-title a {
+    font-size: 1.2em;
+  }
 }
 
 header div a:hover {
