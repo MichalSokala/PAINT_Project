@@ -1,8 +1,32 @@
 header {
-  background-color: #a4c991;
-  padding: 10px 20px;
+osition: fixed;
+    color: white;
+    z-index: 1;
+    top: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    width: 100%;
+    padding: 0 20px;
+    background-color: #5f7f62;
+    box-sizing: border-box;
+}
+
+header .page-title a {
+  font-size: 2em;
+  color: #FFF;
+  text-decoration: none;
+}
+
+header div a {
+  padding: 10px 15px;
+  /*background-color: #1976d2;*/
   color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+header div a:hover {
+  /*background-color: #1565c0;*/
 }

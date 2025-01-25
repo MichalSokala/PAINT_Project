@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./Header";
+import Layout from "./Layout";
 
 const Travel = () => {
     const [travels, setTravels] = useState([]);
@@ -45,9 +46,7 @@ const Travel = () => {
     };
 
     return (
-        <div>
-            <Header/>
-            <h1>Lista podróży</h1>
+        <Layout>
             <h2>Dodaj nową podróż</h2>
             {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
             <form onSubmit={(e) => e.preventDefault()}>
@@ -101,7 +100,7 @@ const Travel = () => {
                     </li>
                 ))}
             </ul>
-        </div>
+        </Layout>
     );
 };
 

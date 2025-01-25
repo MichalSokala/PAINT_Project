@@ -1,6 +1,8 @@
 import React from "react";
 import Header from "./Header";
 import "./Form";
+import {Link} from "react-router-dom";
+import Layout from "./Layout";
 
 const handleLogin = async () => {
 
@@ -8,8 +10,7 @@ const handleLogin = async () => {
 
 const LoginPage = () => {
     return (
-        <div>
-            <Header/>
+        <Layout>
             <h1>Logowanie użytkownika</h1>
             <form onSubmit={(e) => e.preventDefault()}>
                 <input
@@ -23,7 +24,12 @@ const LoginPage = () => {
 
                 <button onClick={handleLogin}>Zaloguj</button>
             </form>
-        </div>
+
+            <div>
+                Nie masz jeszcze konta w serwisie?
+                <Link to="/register">Zarejestruj się</Link>
+            </div>
+        </Layout>
     );
 };
 

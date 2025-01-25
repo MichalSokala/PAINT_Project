@@ -1,0 +1,13 @@
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.grid > div {
+    width:50%;
+}
+
+.grid > div > img {
+    width:calc(100% - 10px);
+}
