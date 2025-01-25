@@ -5,12 +5,14 @@ import Layout from "./Layout";
 
 const Travel = () => {
     const [travels, setTravels] = useState([]);
+    const [users, setUsers] = useState([]);
     const [newTravel, setNewTravel] = useState({
         name: "",
         main_destination: "",
         start_date: "",
         end_date: "",
         is_completed: false,
+        user_id: ""
     });
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -19,12 +21,22 @@ const Travel = () => {
             const response = await axios.get("http://127.0.0.1:8000/api/travel/");
             setTravels(response.data);
         } catch (error) {
-            console.error("Błąd podczas pobierania podróży:", error);
+            console.error("Error fetching travels:", error);
+        }
+    };
+
+    const fetchUsers = async () => {
+        try {
+            const response = await axios.get("http://127.0.0.1:8000/api/user/");
+            setUsers(response.data);
+        } catch (error) {
+            console.error("Error fetching users:", error);
         }
     };
 
     useEffect(() => {
         fetchTravels();
+        fetchUsers();
     }, []);
 
     const handleAddTravel = async () => {
@@ -36,11 +48,12 @@ const Travel = () => {
                 start_date: "",
                 end_date: "",
                 is_completed: false,
+                user_id: ""
             });
             setErrorMessage("");
             fetchTravels();
         } catch (error) {
-            console.error("Błąd podczas dodawania podróży:", error.response?.data || error.message);
+            console.error("Error adding travel:", error.response?.data || error.message);
             setErrorMessage("Nie udało się dodać podróży. Sprawdź dane i spróbuj ponownie.");
         }
     };
@@ -88,6 +101,17 @@ const Travel = () => {
                     />
                     Czy zakończona
                 </label>
+                <select
+                    value={newTravel.user_id}
+                    onChange={(e) => setNewTravel({ ...newTravel, user_id: e.target.value })}
+                >
+                    <option value="">Wybierz użytkownika</option>
+                    {users.map((user) => (
+                        <option key={user.id} value={user.id}>
+                            {user.name} {user.surname}
+                        </option>
+                    ))}
+                </select>
                 <button onClick={handleAddTravel}>Dodaj podróż</button>
             </form>
 
