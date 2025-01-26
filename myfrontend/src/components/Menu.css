@@ -24,16 +24,20 @@ nav li {
     width: 100%; /* Wypełnia całą szerokość Drawer */
     background-color: #e5e7d3; /* Tło menu */
     padding: 10px;
+    box-sizing: border-box;
+    margin: 0px;
+    height: 100%;
 }
 
 .drawer-menu ul {
-    list-style: none;
     padding: 0;
     margin: 0;
 }
 
 .drawer-menu li {
+    list-style: none;
     margin: 20px 10px;
+    padding: 0px;
 }
 
 .drawer-menu li a {

@@ -3,6 +3,8 @@ import axios from "axios";
 import Header from "./Header";
 import Layout from "./Layout";
 import { useSearchParams } from 'react-router-dom';
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 
 const Cost = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -42,14 +44,17 @@ const Cost = () => {
                 {/*    value={newCost.cost_id}*/}
                 {/*    onChange={(e) => setNewCost({...newCost, cost_id: e.target.value})}*/}
                 {/*/>*/}
-                <input
-                    type="number"
-                    placeholder="travel_id"
-                    value={newCost.travel_id}
-                    onChange={(e) =>
-                        setNewCost({...newCost, travel_id: e.target.value})
-                    }
-                />
+                <div>
+                    <label>Podróż  </label>
+                    <input
+                        type="number"
+                        placeholder="travel_id"
+                        value={newCost.travel_id}
+                        onChange={(e) =>
+                            setNewCost({...newCost, travel_id: e.target.value})
+                        }
+                    />
+                </div>
                 {/*<input*/}
                 {/*    type="text"*/}
                 {/*    placeholder="Kategoria"*/}
@@ -59,7 +64,7 @@ const Cost = () => {
                 {/*    }*/}
                 {/*/>*/}
                 <div>
-                    <label>Kategoria</label>
+                    <label>Kategoria  </label>
                     <select onChange={(e) =>
                         setNewCost({...newCost, category: e.target.options[e.target.selectedIndex].value})
                     }>
@@ -70,15 +75,18 @@ const Cost = () => {
                         <option value="inne">Inne</option>
                     </select>
                 </div>
-                <input
-                    type="number"
-                    placeholder="Koszt"
-                    value={newCost.amount}
-                    onChange={(e) =>
-                        setNewCost({...newCost, amount: e.target.value})
-                    }
-                />
-                <button onClick={handleAddCost}>Add cost</button>
+                <div>
+                    <label>Wydana kwota </label>
+                    <input
+                        type="number"
+                        placeholder="Koszt"
+                        value={newCost.amount}
+                        onChange={(e) =>
+                            setNewCost({...newCost, amount: e.target.value})
+                        }
+                    />
+                </div>
+                <Button onClick={handleAddCost} variant="contained">Dodaj wydatki</Button>
             </form>
 
 

@@ -39,7 +39,7 @@ const Header = () => {
             </Drawer>
           </>
         )}
-        <Button variant="contained" color="primary" size="small">
+        <Button variant="contained" color="success" size="small">
           <Link to="/login">Login</Link>
         </Button>
       </div>
