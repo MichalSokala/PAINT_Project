@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from "./Layout";
 import axios from "axios";
 import { PieChart } from '@mui/x-charts/PieChart';
-import { Box, Typography, MenuItem, Select, FormControl, InputLabel } from "@mui/material";
+import { Box, Typography, List, ListItem, ListItemText, Button, MenuItem, Select, FormControl, InputLabel } from "@mui/material";
 
 const CostPage = () => {
     const [costs, setCosts] = useState([]);
@@ -81,7 +81,37 @@ const CostPage = () => {
 
     return (
         <Layout>
-            <h1>Lista wydatków</h1>
+            <Box sx={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
+                <Typography variant="h4" gutterBottom>
+                    Lista wydatków
+                </Typography>
+                {errorMessage && (
+                    <Typography color="error" sx={{ marginBottom: "16px" }}>
+                        {errorMessage}
+                    </Typography>
+                )}
+                <List sx={{ backgroundColor: "#f9f9f9", borderRadius: "8px", padding: "16px" }}>
+                    {costs.map((cost) => (
+                        <ListItem key={cost.cost_id} divider>
+                            <ListItemText
+                                primary={`ID podróży: ${cost.travel_id}`}
+                                secondary={`Kategoria: ${cost.category}, Kwota: ${cost.amount} zł`}
+                            />
+                        </ListItem>
+                    ))}
+                </List>
+
+                <Box sx={{ marginTop: "24px", textAlign: "center" }}>
+                    <Button
+                        variant="contained"
+                        color="success"
+                        component={Link}
+                        to="/cost"
+                    >
+                        Dodaj nowy koszt
+                    </Button>
+                </Box>
+            </Box>
 
             {/* Wybierz podróż */}
             <FormControl fullWidth variant="outlined" margin="normal">
@@ -107,9 +137,9 @@ const CostPage = () => {
                 ))}
             </ul>
 
-            <div>
-                <Link to="/cost">Dodaj nowy koszt</Link>
-            </div>
+            {/*<div>*/}
+            {/*    <Link to="/cost">Dodaj nowy koszt</Link>*/}
+            {/*</div>*/}
 
             {/*<PieChart*/}
             {/*    colors={['red', 'blue', 'green']} // Use palette*/}
@@ -146,33 +176,33 @@ const CostPage = () => {
                         })),
                     },
                 ]}
-                width={600}
-                height={500} // Zwiększ wysokość dla lepszej proporcji
-                radius={100} // Dostosuj promień wykresu
-                innerRadius={40} // Dodaj wewnętrzny promień dla efektu donut
-                label={(d) => `${d.label}: ${d.value}`} // Użyj etykiet z wartościami
+                width={700}
+                height={500}
+                radius={100}
+                innerRadius={40}
+                label={(d) => `${d.label}: ${d.value}`}
                 labelStyle={{
-                    fill: '#fff', // Kolor tekstu etykiety
-                    fontSize: '14px', // Rozmiar czcionki etykiety
-                    fontWeight: 'bold', // Pogrubienie czcionki
+                    fill: '#fff',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
                 }}
                 tooltip={{
                     style: {
-                        backgroundColor: '#333', // Tło tooltipa
-                        color: '#fff', // Kolor tekstu tooltipa
-                        padding: '10px', // Padding tooltipa
-                        borderRadius: '5px', // Zaokrąglone rogi tooltipa
+                        backgroundColor: '#333',
+                        color: '#fff',
+                        padding: '10px',
+                        borderRadius: '5px',
                     },
-                    formatter: (value, name) => `${name}: ${value}`, // Formatowanie tooltipa
+                    formatter: (value, name) => `${name}: ${value}`,
                 }}
                 legend={{
-                    position: 'right', // Pozycja legendy
-                    layout: 'vertical', // Układ pionowy legendy
-                    align: 'right', // Wyrównanie legendy do środka
-                    verticalAlign: 'top', // Wyrównanie pionowe legendy do góry
+                    position: 'right',
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
                     itemStyle: {
-                        color: '#333', // Kolor tekstu legendy
-                        fontSize: '12px', // Rozmiar czcionki legendy
+                        color: '#333',
+                        fontSize: '12px',
                     },
                 }}
             />
