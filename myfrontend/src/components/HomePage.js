@@ -6,7 +6,8 @@ import TravelGrid from "./TravelGrid";
 const HomePage = () => {
     return (
         <Layout>
-            <h1>Witamy w aplikacji podróżniczej</h1>
+            <h1>Witamy w aplikacji podróżniczej!</h1>
+            <img src="logo512.png" alt="Logo aplikacji podróżniczej" className="home-logo"/>
         </Layout>
     );
 };
