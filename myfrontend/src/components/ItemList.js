@@ -1,7 +1,7 @@
-// import React from "react";
-import Layout from "./Layout";
 import React, { useState, useEffect } from "react";
+import Layout from "./Layout";
 import axios from "axios";
+import { Box, Grid, TextField, Button, Typography, Alert, Stack, FormControlLabel, Checkbox } from "@mui/material";
 
 const ItemList = () => {
     const [items, setItems] = useState([]);
@@ -11,6 +11,7 @@ const ItemList = () => {
         travel_id: "", // Foreign key to Travel
     });
     const [errorMessage, setErrorMessage] = useState("");
+
     // Pobierz listę przedmiotów
     const fetchItems = async () => {
         try {
@@ -20,9 +21,11 @@ const ItemList = () => {
             console.error("Błąd podczas pobierania przedmiotów:", error);
         }
     };
+
     useEffect(() => {
         fetchItems();
     }, []);
+
     // Obsługa dodawania nowego przedmiotu
     const handleAddItem = async () => {
         try {
@@ -33,48 +36,92 @@ const ItemList = () => {
                 travel_id: "",
             });
             setErrorMessage("");
-            fetchItems();
+            fetchItems(); // Odświeżenie listy
         } catch (error) {
             console.error("Błąd podczas dodawania przedmiotu:", error.response?.data || error.message);
             setErrorMessage("Nie udało się dodać przedmiotu. Sprawdź dane i spróbuj ponownie.");
         }
     };
+
     return (
         <Layout>
-            <h1>Lista przedmiotów</h1>
-            <h2>Dodaj nowy przedmiot</h2>
-            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-            <form onSubmit={(e) => e.preventDefault()}>
-                <input
-                    type="text"
-                    placeholder="Nazwa przedmiotu"
-                    value={newItem.name}
-                    onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-                />
-                <label>
-                    Czy spakowany:
-                    <input
-                        type="checkbox"
-                        checked={newItem.is_packed}
-                        onChange={(e) => setNewItem({ ...newItem, is_packed: e.target.checked })}
-                    />
-                </label>
-                <input
-                    type="text"
-                    placeholder="ID podróży"
-                    value={newItem.travel_id}
-                    onChange={(e) => setNewItem({ ...newItem, travel_id: e.target.value })}
-                />
-                <button onClick={handleAddItem}>Dodaj przedmiot</button>
-            </form>
-            <ul>
-                {items.map((item) => (
-                    <li key={item.item_id}>
-                        {item.name} - {item.is_packed ? "Spakowany" : "Niespakowany"} (ID podróży: {item.travel_id})
-                    </li>
-                ))}
-            </ul>
+            <Box sx={{ maxWidth: "900px", margin: "0 auto", padding: "20px" }}>
+                <Typography variant="h4" gutterBottom>
+                    Lista przedmiotów
+                </Typography>
+
+                {/* Wyświetlanie błędów */}
+                {errorMessage && (
+                    <Alert severity="error" sx={{ marginBottom: "20px" }}>
+                        {errorMessage}
+                    </Alert>
+                )}
+
+                {/* Formularz dodawania nowego przedmiotu */}
+                <Box sx={{ marginBottom: "40px" }}>
+                    <Typography variant="h6" gutterBottom>
+                        Dodaj nowy przedmiot
+                    </Typography>
+                    <Stack spacing={2}>
+                        <TextField
+                            label="Nazwa przedmiotu"
+                            variant="outlined"
+                            fullWidth
+                            value={newItem.name}
+                            onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={newItem.is_packed}
+                                    onChange={(e) => setNewItem({ ...newItem, is_packed: e.target.checked })}
+                                    color="success"
+                                />
+                            }
+                            label="Czy spakowany?"
+                        />
+                        <TextField
+                            label="ID podróży"
+                            variant="outlined"
+                            fullWidth
+                            value={newItem.travel_id}
+                            onChange={(e) => setNewItem({ ...newItem, travel_id: e.target.value })}
+                        />
+                        <Button
+                            variant="contained"
+                            color="success"
+                            onClick={handleAddItem}
+                            sx={{ marginTop: "20px" }}
+                        >
+                            Dodaj przedmiot
+                        </Button>
+                    </Stack>
+                </Box>
+
+                {/* Wyświetlanie listy przedmiotów */}
+                <Typography variant="h5" gutterBottom>
+                    Przedmioty w podróży
+                </Typography>
+                <Grid container spacing={2}>
+                    {items.map((item) => (
+                        <Grid item xs={12} sm={6} md={4} key={item.item_id}>
+                            <Box sx={{ border: "1px solid #ccc", borderRadius: "8px", padding: "16px" }}>
+                                <Typography variant="body1" gutterBottom>
+                                    <strong>{item.name}</strong>
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                    Status: {item.is_packed ? "Spakowany" : "Niespakowany"}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                    ID podróży: {item.travel_id}
+                                </Typography>
+                            </Box>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Box>
         </Layout>
     );
 };
+
 export default ItemList;

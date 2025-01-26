@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Layout from "./Layout";
+import axios from "axios";
+import { Box, Grid, TextField, Button, Typography, Alert, Stack } from "@mui/material";
 
 const PlacesToSee = () => {
     const [places, setPlaces] = useState([]);
@@ -35,7 +36,7 @@ const PlacesToSee = () => {
                 part_id: "",
             });
             setErrorMessage("");
-            fetchPlaces();
+            fetchPlaces(); // Odświeżenie listy
         } catch (error) {
             console.error("Błąd podczas dodawania miejsca:", error.response?.data || error.message);
             setErrorMessage("Nie udało się dodać miejsca. Sprawdź dane i spróbuj ponownie.");
@@ -44,38 +45,78 @@ const PlacesToSee = () => {
 
     return (
         <Layout>
-            <h1>Lista miejsc do zobaczenia</h1>
-            <h2>Dodaj nowe miejsce</h2>
-            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-            <form onSubmit={(e) => e.preventDefault()}>
-                <input
-                    type="text"
-                    placeholder="Nazwa miejsca"
-                    value={newPlace.name}
-                    onChange={(e) => setNewPlace({ ...newPlace, name: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="Kraj"
-                    value={newPlace.country}
-                    onChange={(e) => setNewPlace({ ...newPlace, country: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="ID części podróży"
-                    value={newPlace.part_id}
-                    onChange={(e) => setNewPlace({ ...newPlace, part_id: e.target.value })}
-                />
-                <button onClick={handleAddPlace}>Dodaj miejsce</button>
-            </form>
+            <Box sx={{ maxWidth: "900px", margin: "0 auto", padding: "20px" }}>
+                <Typography variant="h4" gutterBottom>
+                    Lista miejsc do zobaczenia
+                </Typography>
 
-            <ul>
-                {places.map((place) => (
-                    <li key={place.place_id}>
-                        {place.name} - {place.country} (Część podróży ID: {place.part_id})
-                    </li>
-                ))}
-            </ul>
+                {/* Wyświetlanie błędów */}
+                {errorMessage && (
+                    <Alert severity="error" sx={{ marginBottom: "20px" }}>
+                        {errorMessage}
+                    </Alert>
+                )}
+
+                {/* Formularz dodawania nowego miejsca */}
+                <Box sx={{ marginBottom: "40px" }}>
+                    <Typography variant="h6" gutterBottom>
+                        Dodaj nowe miejsce
+                    </Typography>
+                    <Stack spacing={2}>
+                        <TextField
+                            label="Nazwa miejsca"
+                            variant="outlined"
+                            fullWidth
+                            value={newPlace.name}
+                            onChange={(e) => setNewPlace({ ...newPlace, name: e.target.value })}
+                        />
+                        <TextField
+                            label="Kraj"
+                            variant="outlined"
+                            fullWidth
+                            value={newPlace.country}
+                            onChange={(e) => setNewPlace({ ...newPlace, country: e.target.value })}
+                        />
+                        <TextField
+                            label="ID części podróży"
+                            variant="outlined"
+                            fullWidth
+                            value={newPlace.part_id}
+                            onChange={(e) => setNewPlace({ ...newPlace, part_id: e.target.value })}
+                        />
+                        <Button
+                            variant="contained"
+                            color="success"
+                            onClick={handleAddPlace}
+                            sx={{ marginTop: "20px" }}
+                        >
+                            Dodaj miejsce
+                        </Button>
+                    </Stack>
+                </Box>
+
+                {/* Wyświetlanie listy miejsc */}
+                <Typography variant="h5" gutterBottom>
+                    Miejsca do zobaczenia
+                </Typography>
+                <Grid container spacing={2}>
+                    {places.map((place) => (
+                        <Grid item xs={12} sm={6} md={4} key={place.place_id}>
+                            <Box sx={{ border: "1px solid #ccc", borderRadius: "8px", padding: "16px" }}>
+                                <Typography variant="body1" gutterBottom>
+                                    <strong>{place.name}</strong>
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                    Kraj: {place.country}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                    Część podróży ID: {place.part_id}
+                                </Typography>
+                            </Box>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Box>
         </Layout>
     );
 };
