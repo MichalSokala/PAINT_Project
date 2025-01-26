@@ -12,7 +12,7 @@ const Travel = () => {
         start_date: "",
         end_date: "",
         is_completed: false,
-        user_id: ""
+        user_ids: []
     });
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -40,22 +40,49 @@ const Travel = () => {
     }, []);
 
     const handleAddTravel = async () => {
-        try {
-            await axios.post("http://127.0.0.1:8000/api/travel/", newTravel);
-            setNewTravel({
-                name: "",
-                main_destination: "",
-                start_date: "",
-                end_date: "",
-                is_completed: false,
-                user_id: ""
-            });
-            setErrorMessage("");
-            fetchTravels();
-        } catch (error) {
-            console.error("Error adding travel:", error.response?.data || error.message);
-            setErrorMessage("Nie udało się dodać podróży. Sprawdź dane i spróbuj ponownie.");
+    try {
+        // Tworzymy payload z zamianą user_ids na users
+        const payload = {
+            ...newTravel,
+            users: newTravel.user_ids, // Backend oczekuje klucza `users`
+        };
+
+        // Wysyłamy poprawnie sformatowane dane
+        await axios.post("http://127.0.0.1:8000/api/travel/", payload);
+
+        // Resetujemy stan formularza po dodaniu podróży
+        setNewTravel({
+            name: "",
+            main_destination: "",
+            start_date: "",
+            end_date: "",
+            is_completed: false,
+            user_ids: []
+        });
+
+        setErrorMessage(""); // Czyścimy komunikaty o błędach
+        fetchTravels(); // Odświeżamy listę podróży
+    } catch (error) {
+        console.error("Error adding travel:", error.response?.data || error.message);
+        setErrorMessage("Nie udało się dodać podróży. Sprawdź dane i spróbuj ponownie.");
         }
+    };
+
+    const handleUserSelection = (userId) => {
+        setNewTravel((prevState) => {
+            const alreadySelected = prevState.user_ids.includes(userId);
+            if (alreadySelected) {
+                return {
+                    ...prevState,
+                    user_ids: prevState.user_ids.filter((id) => id !== userId),
+                };
+            } else {
+                return {
+                    ...prevState,
+                    user_ids: [...prevState.user_ids, userId],
+                };
+            }
+        });
     };
 
     return (
@@ -101,17 +128,20 @@ const Travel = () => {
                     />
                     Czy zakończona
                 </label>
-                <select
-                    value={newTravel.user_id}
-                    onChange={(e) => setNewTravel({ ...newTravel, user_id: e.target.value })}
-                >
-                    <option value="">Wybierz użytkownika</option>
+                <div>
+                    <p>Wybierz użytkowników:</p>
                     {users.map((user) => (
-                        <option key={user.id} value={user.id}>
+                        <label key={user.id}>
+                            <input
+                                type="checkbox"
+                                value={user.id}
+                                checked={newTravel.user_ids.includes(user.id)}
+                                onChange={() => handleUserSelection(user.id)}
+                            />
                             {user.name} {user.surname}
-                        </option>
+                        </label>
                     ))}
-                </select>
+                </div>
                 <button onClick={handleAddTravel}>Dodaj podróż</button>
             </form>
 
