@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Layout from "./Layout";
+import {
+    Box,
+    Typography,
+    List,
+    ListItem,
+    ListItemText,
+    TextField,
+    Button,
+    Alert,
+    Stack,
+} from "@mui/material";
 
 const TravelGroup = () => {
     const [travelGroups, setTravelGroups] = useState([]);
@@ -42,32 +53,70 @@ const TravelGroup = () => {
 
     return (
         <Layout>
-            <h1>Lista grup podróży</h1>
-            <h2>Dodaj nową grupę podróży</h2>
-            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-            <form onSubmit={(e) => e.preventDefault()}>
-                <input
-                    type="text"
-                    placeholder="ID podróży"
-                    value={newTravelGroup.travel_id}
-                    onChange={(e) => setNewTravelGroup({ ...newTravelGroup, travel_id: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="ID użytkownika"
-                    value={newTravelGroup.user_id}
-                    onChange={(e) => setNewTravelGroup({ ...newTravelGroup, user_id: e.target.value })}
-                />
-                <button onClick={handleAddTravelGroup}>Dodaj grupę podróży</button>
-            </form>
+            <Box sx={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
+                <Typography variant="h4" gutterBottom>
+                    Grupy podróży
+                </Typography>
 
-            <ul>
-                {travelGroups.map((group) => (
-                    <li key={group.group_id}>
-                        ID Grupy: {group.group_id} - ID Podróży: {group.travel_id} - ID Użytkownika: {group.user_id}
-                    </li>
-                ))}
-            </ul>
+                {/* Wyświetlanie błędów */}
+                {errorMessage && (
+                    <Alert severity="error" sx={{ marginBottom: "20px" }}>
+                        {errorMessage}
+                    </Alert>
+                )}
+
+                {/* Lista grup podróży */}
+                <List sx={{ backgroundColor: "#f9f9f9", borderRadius: "8px", padding: "16px" }}>
+                    {travelGroups.map((group, index) => (
+                        <ListItem key={index} divider>
+                            <ListItemText
+                                primary={`ID Podróży: ${group.travel_id}`}
+                                secondary={`ID Użytkownika: ${group.user_id}`}
+                            />
+                        </ListItem>
+                    ))}
+                </List>
+
+                {/* Formularz dodawania nowej grupy */}
+                <Box sx={{ marginTop: "20px" }}>
+                    <Typography variant="h6" gutterBottom>
+                        Dodaj nową grupę podróży
+                    </Typography>
+                    <Stack spacing={2}>
+                        <TextField
+                            label="ID Podróży"
+                            variant="outlined"
+                            fullWidth
+                            value={newTravelGroup.travel_id}
+                            onChange={(e) =>
+                                setNewTravelGroup((prev) => ({
+                                    ...prev,
+                                    travel_id: e.target.value,
+                                }))
+                            }
+                        />
+                        <TextField
+                            label="ID Użytkownika"
+                            variant="outlined"
+                            fullWidth
+                            value={newTravelGroup.user_id}
+                            onChange={(e) =>
+                                setNewTravelGroup((prev) => ({
+                                    ...prev,
+                                    user_id: e.target.value,
+                                }))
+                            }
+                        />
+                        <Button
+                            variant="contained"
+                            color="success"
+                            onClick={handleAddTravelGroup}
+                        >
+                            Dodaj grupę podróży
+                        </Button>
+                    </Stack>
+                </Box>
+            </Box>
         </Layout>
     );
 };
