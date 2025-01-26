@@ -1,7 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import CssBaseline from '@mui/material/CssBaseline';
 import HomePage from "./components/HomePage";
 import Travel from "./components/Travel";
 import TravelGroup from "./components/TravelGroup";
@@ -15,25 +13,8 @@ import TravelPage from "./components/TravelPage";
 import CostPage from "./components/CostPage";
 import UserPage from "./components/UserPage";
 
-// Nie korzystamy z theme MUI
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: '#4CAF50',
-//     },
-//     secondary: {
-//       main: '#388E3C',
-//     },
-//   },
-//   typography: {
-//     fontFamily: 'Roboto, Arial',
-//   },
-// });
-
 function App() {
     return (
-        // <ThemeProvider theme={{theme}}>
-        //     <CssBaseline />
         <Router>
             <Routes>
                 <Route path="/" element={<HomePage />} />
@@ -50,7 +31,6 @@ function App() {
                 <Route path="/user" element={<UserPage />} />
             </Routes>
         </Router>
-        // </ThemeProvider>
     );
 }
 
