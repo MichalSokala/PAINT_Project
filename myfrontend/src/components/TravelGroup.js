@@ -65,17 +65,6 @@ const TravelGroup = () => {
                     </Alert>
                 )}
 
-                {/* Lista grup podróży */}
-                <List sx={{ backgroundColor: "#f9f9f9", borderRadius: "8px", padding: "16px" }}>
-                    {travelGroups.map((group, index) => (
-                        <ListItem key={index} divider>
-                            <ListItemText
-                                primary={`ID Podróży: ${group.travel_id}`}
-                                secondary={`ID Użytkownika: ${group.user_id}`}
-                            />
-                        </ListItem>
-                    ))}
-                </List>
 
                 {/* Formularz dodawania nowej grupy */}
                 <Box sx={{ marginTop: "20px" }}>
