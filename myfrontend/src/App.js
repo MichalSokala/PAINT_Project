@@ -14,6 +14,7 @@ import RegisterPage from "./components/RegisterPage";
 import TravelPage from "./components/TravelPage";
 import CostPage from "./components/CostPage";
 
+// Nie korzystamy z theme MUI
 // const theme = createTheme({
 //   palette: {
 //     primary: {
