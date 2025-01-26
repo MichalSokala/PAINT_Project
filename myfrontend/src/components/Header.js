@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <header>
       <div className="page-title">
-        <Link to="/">TravelApp</Link>
+        <Link to="/">TravelMate</Link>
       </div>
       <div>
         {isMobile && (

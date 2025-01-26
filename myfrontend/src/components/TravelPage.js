@@ -79,11 +79,11 @@ const TravelPage = () => {
 
         <Box mt={4}>
             <Typography variant="h6" gutterBottom>
-              Znajdź informacje o pogodzie w miejscu, do którego jedzisz
+              Znajdź informacje o pogodzie
             </Typography>
 
             <TextField
-                label="Wpisz miasto"
+                label="Wpisz miasto (w języku angielskim)"
                 variant="outlined"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
