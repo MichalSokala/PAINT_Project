@@ -13,6 +13,7 @@ import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import TravelPage from "./components/TravelPage";
 import CostPage from "./components/CostPage";
+import UserPage from "./components/UserPage";
 
 // Nie korzystamy z theme MUI
 // const theme = createTheme({
@@ -46,6 +47,7 @@ function App() {
                 <Route path="/places" element={<PlacesToSee />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/user" element={<UserPage />} />
             </Routes>
         </Router>
         // </ThemeProvider>
