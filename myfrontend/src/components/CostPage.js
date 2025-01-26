@@ -128,14 +128,14 @@ const CostPage = () => {
             </FormControl>
 
 
-            <ul>
-                {costs.map((cost) => (
-                    <li key={cost.cost_id}>
-                        {cost.travel_id} - {cost.amount} -{" "}
-                        {cost.category} -{" "}
-                    </li>
-                ))}
-            </ul>
+            {/*<ul>*/}
+            {/*    {costs.map((cost) => (*/}
+            {/*        <li key={cost.cost_id}>*/}
+            {/*            {cost.travel_id} - {cost.amount} -{" "}*/}
+            {/*            {cost.category} -{" "}*/}
+            {/*        </li>*/}
+            {/*    ))}*/}
+            {/*</ul>*/}
 
             {/*<div>*/}
             {/*    <Link to="/cost">Dodaj nowy koszt</Link>*/}
