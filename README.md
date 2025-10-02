@@ -8,3 +8,8 @@ A project created for PAINT (Web application programming) course at the Warsaw U
 - [Patryk Jankowski](https://github.com/PilotPat25)
 - [Jakub Walasek](https://github.com/Elmonus)
 ### Used technologies:
+- Python - Programming language
+- Django - Python web framework
+- JavaScript - Programming language
+- React - JavaScript front-end library
+- SQLite - Relational database
